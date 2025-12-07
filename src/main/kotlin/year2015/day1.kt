@@ -13,7 +13,7 @@ fun main() {
     part2(input)
 }
 
-class Floorcounter {
+private class Floorcounter {
 
     fun move(directions: String): Int {
         var current = 0
