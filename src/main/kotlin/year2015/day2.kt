@@ -1,5 +1,9 @@
 package year2015
 
+import util.readFile
+import year2015.part1
+import year2015.part2
+import java.io.BufferedReader
 import kotlin.time.measureTimedValue
 
 private class Box(dimensions: String) {
@@ -42,8 +46,12 @@ fun main() {
     //tests1()
     //tests2()
 
-    part1()
-    part2()
+    //
+    readFile("/year2015/day2.txt").use {
+        part1(it)
+        part2(it)
+    }
+
 }
 
 
@@ -81,12 +89,11 @@ private fun tests2() {
 }
 
 
-private fun part1() {
-    val stream = Box::class.java.getResource("/year2015/day2.txt")?.openStream()?.bufferedReader()
+private fun part1(reader: BufferedReader) {
 
     val result = measureTimedValue {
         var result = 0
-        stream?.forEachLine { dimensions ->
+        reader.forEachLine { dimensions ->
             val required = Box(dimensions).wrappingPaper()
             result += required
         }
@@ -96,12 +103,11 @@ private fun part1() {
     println("part 1: ${result.value} (in ${result.duration})")
 }
 
-private fun part2() {
-    val stream = Box::class.java.getResource("/year2015/day2.txt")?.openStream()?.bufferedReader()
+private fun part2(reader: BufferedReader) {
 
     val result = measureTimedValue {
         var result = 0
-        stream?.forEachLine { dimensions ->
+        reader.forEachLine { dimensions ->
             val required = Box(dimensions).ribbonLength()
             result += required
         }
